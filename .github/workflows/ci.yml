@@ -15,18 +15,17 @@ jobs:
           node-version: 16
       - name: Install dependencies
         run: |
-          cd react-test-web
+          cd my-app
           npm ci
       - name: Build the app
         run: |
-          cd react-test-web
+          cd my-app
           npm run build
       - name: Run component tests
         run: |
-          cd react-test-web
-          npm run test
+          cd my-app
       - name: Start the app
         run: |
-          cd react-test-web
+          cd my-app
           npm start &
           npx wait-on --timeout 60000
