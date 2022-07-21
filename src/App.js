@@ -1,70 +1,36 @@
-import React, { useReducer, useState } from "react";
-import Todo from "./components/Todo";
-
-function reducer(todos, action){
-
-
-  switch (action.type){
-
-    case 'ADD':
-      return [...todos , newTodo(action.payload.name)];
-    case 'TOGGLE':
-    return todos.map( todo => {
-
-      if(todo.id === action.payload.id){
-
-        return { ...todo, completed : !todo.completed }
-      }
-
-      return todo
-    })
-    case 'DELETE':
-      return todos.filter( todo => todo.id !== action.payload.id)
-    
-     
-    default:
-      return todos;  
-  }
-
-}
+import React, { useCallback, useState } from "react";
+import List from "./components/List";
 
 
 
-function newTodo (name){
-return { id  : Date.now() , name : name , completed : false}
-}
 
 function App() {
 
+  const [number ,setNumber] = useState(1);
 
-  const [todos,dispatch] = useReducer( reducer, [])
-  const [name , setName] = useState('')
+  const [dark ,setDark] = useState(false)
 
-  const handleSubmit = (e)=>{
 
-    e.preventDefault()
+  const getList = useCallback(() =>  {
+    return [number , number + 1 , number + 2]
+  }, [number])
 
-    dispatch({ type : "ADD" , payload : { name : name}})
-    setName('')
+  const theme =  {
+
+    backgroundColor: dark ? 'black' : 'white',
+    color: dark ? 'white' : 'black',
+
 
   }
 
-
-console.log(todos);
-
-
   return (
-    <div>
+    <div style={theme}>
 
-      <form onSubmit={handleSubmit}><input value={name} onChange={ e => setName(e.target.value)} /></form>
+      <input value={number} type="number" onChange={ (e) => setNumber(e.target.value) } />
 
+      <button onClick={ () => setDark(!dark)}>Toggle Theme</button>
 
-      <h3>Todos</h3>
-      {todos.map((todo) =>{
-        return <Todo key={todo.id}  todo={todo} dispatch={dispatch}/>
-      })}
-
-      
+    <List getList={getList} />
      
     
       
