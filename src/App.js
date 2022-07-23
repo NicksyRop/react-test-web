@@ -1,28 +1,28 @@
-import React, {  useRef } from "react";
+import React, {  createContext, useState } from "react";
+import Login from "./components/Login";
+import { Profile } from "./components/Profile";
+
+export const UserContext = createContext(null)
 
 
 
 
 function App() {
 
-  const inputRef = useRef(null);
-
-
-  const onclick = () =>{
-
-    console.log(inputRef.current.value);
-  }
+  const [username ,setUsername] = useState("Nicksy");
 
   
 
   return (
-    <div>
+    <UserContext.Provider value={{ username , setUsername}}>
 
+    <Login />
+    <Profile />
+    
+    </UserContext.Provider >
 
-      <input type="text"  ref={inputRef} placeholder="name here" />
+     
 
-      <button onClick={onclick}>click</button>
-    </div>
       
     
   );
