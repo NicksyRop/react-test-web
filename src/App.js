@@ -1,40 +1,30 @@
-import React, { useCallback, useState } from "react";
-import List from "./components/List";
+import React, {  useRef } from "react";
 
 
 
 
 function App() {
 
-  const [number ,setNumber] = useState(1);
-
-  const [dark ,setDark] = useState(false)
+  const inputRef = useRef(null);
 
 
-  const getList = useCallback(() =>  {
-    return [number , number + 1 , number + 2]
-  }, [number])
+  const onclick = () =>{
 
-  const theme =  {
-
-    backgroundColor: dark ? 'black' : 'white',
-    color: dark ? 'white' : 'black',
-
-
+    console.log(inputRef.current.value);
   }
 
+  
+
   return (
-    <div style={theme}>
+    <div>
 
-      <input value={number} type="number" onChange={ (e) => setNumber(e.target.value) } />
 
-      <button onClick={ () => setDark(!dark)}>Toggle Theme</button>
+      <input type="text"  ref={inputRef} placeholder="name here" />
 
-    <List getList={getList} />
-     
-    
-      
+      <button onClick={onclick}>click</button>
     </div>
+      
+    
   );
 }
 
