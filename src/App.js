@@ -1,25 +1,24 @@
-import React, {  createContext, useState } from "react";
-import Login from "./components/Login";
-import { Profile } from "./components/Profile";
-
-export const UserContext = createContext(null)
+import Home from "./Home";
+import Posts from "./Posts";
 
 
 
 
 function App() {
 
-  const [username ,setUsername] = useState("Nicksy");
 
   
 
   return (
-    <UserContext.Provider value={{ username , setUsername}}>
+    <>
 
-    <Login />
-    <Profile />
+    <Home />
+    <Posts />
+   
+    </>
     
-    </UserContext.Provider >
+    
+    
 
      
 
